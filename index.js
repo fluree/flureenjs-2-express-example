@@ -27,6 +27,14 @@ app.get("/query", async (req, res) => {
   res.send(results);
 });
 
+app.post("/transact-user", async (req, res) => {
+  const conn = await flureeConn();
+  const transaction = [{ _id: "_user", username: "jake" }];
+
+  const results = await flureenjs.transact(conn, ledger, transaction);
+  res.send(results);
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
